@@ -14,8 +14,8 @@ Dramas → DryRun
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        //features = {"src/test/resources/features/ScenarioOutline.feature"},
-        features = {"src/test/resources/features"},
+        features = {"src/test/resources/features/ScenarioOutline.feature"},
+        //features = {"src/test/resources/features"},
         //features = {"@target/rerun.txt"},//for failed scenarios
 glue = {"stepdefinitions"},
         dryRun = false,
@@ -23,7 +23,8 @@ glue = {"stepdefinitions"},
                 "pretty",
                 "html:target/report.html",
                 "json:target/report.json",
-                "rerun:target/rerun.txt"
+                "rerun:target/rerun.txt",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
         // extend report u can add with grasshopper
 //tags = "@sanity",
@@ -32,7 +33,9 @@ glue = {"stepdefinitions"},
         monochrome = true,
         publish = true
 )
-public class Runner {
+
+//when i was not using Test, it wasn't working from mvn test
+public class RunnerTest {
 }
 
 /*
@@ -44,4 +47,5 @@ rerun → rerun failed tests
 timeline → parallel execution timeline
 usage → step usage stats
 progress → minimal dots output
+--strict deprecated in new version. by default cucumber takes this now
  */

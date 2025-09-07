@@ -6,15 +6,30 @@ import io.cucumber.java.en.When;
 
 public class Loginwithparams {
 
+    ScenarioContext context;
+
+    public Loginwithparams(ScenarioContext context) {
+
+        this.context = context;
+    }
+
+    @Given("Launch browser")
+    public void launch_browser() {
+        System.out.println("From Backgroud");
+    }
+
 
     @Given("When I am login page for my site")
     public void when_i_am_login_page_for_my_site() {
-
+        context.set("somekey", "somevlue");
         System.out.println("I am on login page");
     }
     @When("User enters {string} and {string}")
     public void user_enters_and(String string, String string2) {
-        System.out.println("I  entering uername"+string+ "password"+string2);
+        System.out.println("Value retrived from context");
+        System.out.println("Printing from context"+context.get("somekey").toString());
+        System.out.println("I  entering uername "+string+ " password "+string2);
+
     }
     @When("Clicks Submit button")
     public void clicks_submit_button() {

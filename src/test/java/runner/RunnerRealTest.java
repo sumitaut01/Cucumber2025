@@ -2,6 +2,7 @@ package runner;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
+
 /*
 “Funny Guys Tag Parties, Publish Many Dramas.”
 Funny → Features
@@ -14,10 +15,10 @@ Dramas → DryRun
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"src/test/resources/features/ScenarioOutline.feature"},
+        features = {"src/test/resources/featuresreal/Login.feature"},
         //features = {"src/test/resources/features"},
         //features = {"@target/rerun.txt"},//for failed scenarios
-glue = {"stepdefinitions","hooks"},
+glue = {"stepdefinitionsreal","hooks"},
         dryRun = false,
         plugin = {
                 "pretty",
@@ -28,14 +29,14 @@ glue = {"stepdefinitions","hooks"},
         },
         // extend report u can add with grasshopper
 //tags = "@sanity",
-        //tags = "@sanity" and not @regression
+        //tags = "@login" and not @regression
         //tags = "@sanity" or @regression
         monochrome = true,
         publish = true
 )
 
 //when i was not using Test, it wasn't working from mvn test
-public class RunnerTest {
+public class RunnerRealTest {
 }
 
 /*

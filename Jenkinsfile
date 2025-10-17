@@ -4,18 +4,21 @@ pipeline {
     stages {
         stage('Testing') {
             steps {
-                dir('Cucumber2025') {     // 👈 path where your pom.xml exists
-                    bat 'mvn clean test'
-                }
+                echo '🧪 Running Maven tests...'
+                bat 'mvn clean test'
             }
         }
     }
 
     post {
         always {
+            echo '📊 Publishing Cucumber Report...'
             publishHTML(target: [
-                reportDir: 'Cucumber2025/target',
-                reportFiles: 'report.html',
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'target/reports',    // ✅ where your report is
+                reportFiles: 'report.html',     // ✅ your actual report file name
                 reportName: 'Cucumber HTML Report'
             ])
         }

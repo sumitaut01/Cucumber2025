@@ -1,20 +1,30 @@
 package context;
 
 import managers.DriverManager;
+import managers.PageObjectManager;
 
 public class TestContext {
-private DriverManager driverManager;
-private ScenarioContext scenarioContext;
-    public TestContext(DriverManager driverManager, ScenarioContext scenarioContext) {
-        this.driverManager = driverManager;
-        this.scenarioContext = scenarioContext;
-        System.out.println("TestContext constructor");
+
+    private final DriverManager driverManager;
+    private final ScenarioContext scenarioContext;
+    private final PageObjectManager pageObjectManager;
+
+    public TestContext() {
+        this.driverManager = new DriverManager();
+        this.scenarioContext = new ScenarioContext();
+        this.pageObjectManager = new PageObjectManager(driverManager.getDriver());
     }
+
     public DriverManager getDriverManager() {
         return driverManager;
     }
+
     public ScenarioContext getScenarioContext() {
         return scenarioContext;
     }
 
+    public PageObjectManager getPageObjectManager() {
+        return pageObjectManager;
+    }
 }
+

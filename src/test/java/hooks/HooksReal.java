@@ -3,47 +3,58 @@ package hooks;
 import context.TestContext;
 import io.cucumber.java.*;
 import managers.DriverManager;
-
-
+import managers.ConfigReader;
+import org.openqa.selenium.WebDriver;
 
 public class HooksReal {
-    DriverManager driverManager;
+
+    private final DriverManager driverManager;
 
     public HooksReal(TestContext context) {
         this.driverManager = context.getDriverManager();
-
     }
+
+    @BeforeAll
+    public static void before_all() {
+        System.out.println("=== Global Setup: Starting test suite ===");
+    }
+
+    @AfterAll
+    public static void after_all() {
+        System.out.println("=== Global Teardown: Test suite finished ===");
+    }
+
     @Before
     public void beforeHook() {
-        System.out.println("Inside Before Hooks");
-        driverManager.getDriver().manage().window().maximize();
+        System.out.println("Inside Before Hook (Thread " + Thread.currentThread().getId() + ")");
+        WebDriver driver = driverManager.getDriver();
+        driver.manage().window().maximize();
+        driver.get(ConfigReader.get("baseUrl"));
     }
+
+    @Before
+    public void beforeScenario(Scenario scenario) {
+        String browser = ConfigReader.get("browser");
+        String execution = ConfigReader.get("execution");
+        long threadId = Thread.currentThread().getId();
+        scenario.log("🌐 Scenario: " + scenario.getName());
+        scenario.log("🧭 Browser: " + browser+" "+"Execution Type: " + execution+" "+"🧵 Thread ID: " + threadId);
+    }
+
+
     @After
     public void afterHook() {
-        System.out.println("Inside Hooks After");
-        driverManager.getDriver().quit();
-        System.out.println("Inside Hooks After. Driver destroyed");
-    }
-    @BeforeAll
-    public static void before_all(){
-        System.out.println("Calling before all");
-
-    }
-    @AfterAll
-    public static void after_all(){
-        System.out.println("Calling after all");
+        System.out.println("Inside After Hook (Thread " + Thread.currentThread().getId() + ")");
+        driverManager.quitDriver(); // ✅ better than driver.get().quit()
     }
 
     @BeforeStep
-    public void beforeStep(){
-        System.out.println("Calling beforeStep ");
-
+    public void beforeStep() {
+        System.out.println("→ Before Step");
     }
-    @AfterStep
-    public void afterStep(){
-        System.out.println("Calling afterStep ");
 
+    @AfterStep
+    public void afterStep() {
+        System.out.println("← After Step");
     }
 }
-
-

@@ -1,8 +1,6 @@
 
 k
 ;src/test/resources/features/loginwithangularbracket.feature,8\b\8b4ece350054f34cc280e7816cab99bbc2ef908f
-X
-(src/test/java/reporter/extent.properties,3\0\304735f9eef5ca542d980dfa77bec3f52f527de3
 c
 3src/test/resources/features/ScenarioOutline.feature,9\1\91138af1deed7c202409731fada6c37fd09281c5
 n

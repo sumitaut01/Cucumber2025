@@ -23,14 +23,33 @@
       <version>7.27.2</version>
     </dependency>
 
+<!--    to use build in parallel execution of junit 5 we will have to comement below-->
+<!--    <dependency>-->
+<!--      <groupId>io.cucumber</groupId>-->
+<!--      <artifactId>cucumber-junit</artifactId>-->
+<!--      <version>7.27.2</version>-->
+<!--    </dependency>-->
+
+
+    <!-- Use JUnit 5 platform engine instead of the old JUnit 4 runner -->
     <dependency>
       <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-junit</artifactId>
+      <artifactId>cucumber-junit-platform-engine</artifactId>
       <version>7.27.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- JUnit 5 core engine -->
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite</artifactId>
+      <version>1.11.0</version>
+      <scope>test</scope>
     </dependency>
 
 
-  <dependency>
+
+    <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
     <version>4.35.0</version>
@@ -122,5 +141,34 @@
         </configuration>
       </plugin>
     </plugins>
+
+
+
+
   </build>
+  <profiles>
+    <profile>
+      <id>chrome</id>
+      <properties>
+        <browser>chrome</browser>
+        <execution>cloud</execution>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>firefox</id>
+      <properties>
+        <browser>firefox</browser>
+        <execution>cloud</execution>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>edge</id>
+      <properties>
+        <browser>edge</browser>
+        <execution>cloud</execution>
+      </properties>
+    </profile>
+  </profiles>
 </project>

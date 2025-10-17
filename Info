@@ -1,0 +1,9 @@
+Why this change matters
+JUnit 5 uses the JUnit Platform instead of @RunWith.
+Configuration moves to junit-platform.properties (no annotation clutter).
+
+You get native parallel execution out of the box.
+You can still filter by tag or name using Maven commands:
+
+mvn test -Dcucumber.filter.tags="@smoke"
+mvn test -Dcucumber.filter.name="Login"

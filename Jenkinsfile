@@ -1,39 +1,23 @@
-// pipeline {
-//     agent any
-//     stages {
-//         stage('Run Parallel Browsers') {
-//             parallel {
-//                 stage('Chrome') {
-//                     steps {
-//                         sh 'mvn clean test -Pchrome'
-//                     }
-//                 }
-//                 stage('Firefox') {
-//                     steps {
-//                         sh 'mvn clean test -Pfirefox'
-//                     }
-//                 }
-//                 stage('Edge') {
-//                     steps {
-//                         sh 'mvn clean test -Pedge'
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
-
-
 pipeline {
     agent any
 
     stages {
         stage('Testing') {
             steps {
-                sh 'mvn clean test'
+                dir('Cucumber2025') {     // 👈 path where your pom.xml exists
+                    bat 'mvn clean test'
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            publishHTML(target: [
+                reportDir: 'Cucumber2025/target',
+                reportFiles: 'report.html',
+                reportName: 'Cucumber HTML Report'
+            ])
         }
     }
 }

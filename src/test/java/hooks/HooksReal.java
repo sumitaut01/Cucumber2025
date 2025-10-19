@@ -37,6 +37,7 @@ public class HooksReal {
         String browser = ConfigReader.get("browser");
         String execution = ConfigReader.get("execution");
         long threadId = Thread.currentThread().getId();
+        //scenario.log   adds in cucumber record
         scenario.log("🌐 Scenario: " + scenario.getName());
         scenario.log("🧭 Browser: " + browser+" "+"Execution Type: " + execution+" "+"🧵 Thread ID: " + threadId);
     }

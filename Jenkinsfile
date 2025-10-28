@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent win10_node
 
     environment {
         MY_ENV_VAR = "somevalue"

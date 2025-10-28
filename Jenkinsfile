@@ -1,6 +1,5 @@
 pipeline {
     agent {
-        # 'label' is the most common way to target a specific agent or group
         label 'win10_node' 
     }
 

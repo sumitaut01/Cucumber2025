@@ -1,5 +1,8 @@
 pipeline {
-    agent win10_node
+    agent {
+        # 'label' is the most common way to target a specific agent or group
+        label 'win10_node' 
+    }
 
     environment {
         MY_ENV_VAR = "somevalue"

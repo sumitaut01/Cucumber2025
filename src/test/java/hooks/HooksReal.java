@@ -54,8 +54,15 @@ public class HooksReal {
         System.out.println("→ Before Step");
     }
 
+    // so if step fails then we may need to add some screenshot. After step with scenario.isFailed() can work fine
+
     @AfterStep
-    public void afterStep() {
+    public void afterStep(Scenario scenario) {
+
         System.out.println("← After Step");
+
+        if(scenario.isFailed()){
+            System.out.println("Step has failed. Add Screenshot code below");
+        }
     }
 }
